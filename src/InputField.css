@@ -1,0 +1,38 @@
+.input-field {
+    display:flex;
+    flex-direction: row;    
+}
+
+label {
+  color: #999;
+  display: block;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.05em
+}
+
+.nFormat {  
+  border: 2px solid #ccc;
+  border-radius: 7px;
+  color: #999;
+  background: white;
+
+  font-size: 30px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  height: 50px;
+
+  line-height: 2.5;
+}
+
+#selection {
+    color: black;
+    line-height: 3.7;
+}
+
