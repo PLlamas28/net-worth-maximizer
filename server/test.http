@@ -1,0 +1,8 @@
+### Test POST /api/data with form1Data and form2Data
+POST http://localhost:5000/api/data
+Content-Type: application/json
+
+{
+  "form1Data": [10, 20, 30, 40],
+  "form2Data": [15, 25, 35, 45]
+}
