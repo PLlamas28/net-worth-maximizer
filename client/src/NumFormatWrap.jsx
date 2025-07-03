@@ -4,7 +4,7 @@ import './NumFormatWrap.css'
 function NumFormatWrap({ name, prefix, suffix, sep }) {
     return (
         <div className='box-wrapper'>
-            <h4>{name}</h4>
+            <h3>{name}</h3>
             <NumericFormat
                 thousandSeparator={sep}
                 prefix={prefix}

@@ -6,16 +6,51 @@
     
 }
 
+h2 {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
 .field-box {
     margin: 10px;
     padding: 10px;
     box-shadow: 18px 17px 25px 0px rgba(0,0,0,0.34);
-    border-radius: 10px;
-    background-color: white;
+    border-radius: 3px;
+    background-color: #f4eee6;
     width: 31%;
 }
 
 .field-box-row {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.savings-nFormat {  
+  border: 1px solid #8b8c8f;
+  border-radius: .125rem;
+  outline: none;
+  color: #000000;
+  background: white;
+
+  font-size: 100%;
+  height: 1.25rem;
+  padding: .5rem 1rem;
+  width: 90.5%;
+}
+
+h3 {
+  font-size: .8125rem;
+  font-weight: 500;
+}
+
+#rag, #gar {
+    display: flex;
+    flex-direction: row;
+    width:100%;
+}
+
+#bank-savings-wrap, #apy-wrap {
+    width: 47.5%;
 }

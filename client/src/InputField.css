@@ -2,26 +2,34 @@
   padding:0px;
 }
 
+h3 {
+  font-size: .8125rem;
+  font-weight: 500;
+  margin: .25rem 0rem;
+  text-align: left;
+}
+
 .input-field {
   display:flex;
   flex-direction: row;    
 }
 
 .nFormat {  
-  border: 2px solid #ccc;
-  border-radius: 7px;
-  color: #999;
+  border: 1px solid #8b8c8f;
+  border-radius: .125rem;
+  outline: none;
+  color: #000000;
   background: white;
 
-  font-size: 30px;
-  font-family: 'PT Sans', sans-serif;
+  font-size: 100%;
 
   width: 60%;
+  height: 1.25rem;
+  padding: .5rem 1rem;
+
 }
 
 #selection {
-    color: black;
-    line-height: 3.7;
     width: 40%;
 }
 
