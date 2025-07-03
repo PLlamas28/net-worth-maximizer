@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
 import InputField from './InputField'
+import InputView from './InputView'
 import NumberForm from './NumberForm'
 import ChartComponent from './ChartComponent'
 
@@ -74,7 +75,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<InputField />} />
+        <Route path="/" element={<InputView />} />
         <Route path="/another" element={<NumberForm />} />
       </Routes>
     </Router>

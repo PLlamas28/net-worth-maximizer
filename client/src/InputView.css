@@ -1,0 +1,21 @@
+
+.input-parent {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(179, 177, 177);
+    
+}
+
+.field-box {
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 18px 17px 25px 0px rgba(0,0,0,0.34);
+    border-radius: 10px;
+    background-color: white;
+    width: 31%;
+}
+
+.field-box-row {
+    display: flex;
+    flex-direction: row;
+}

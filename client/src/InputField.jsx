@@ -3,7 +3,7 @@ import { NumericFormat } from "react-number-format"
 import Select from "react-select"
 import { useState } from 'react';
 
-export default function InputField() {
+export default function InputField({name}) {
     const options = [
         { value: '1', label: 'per hour' },
         { value: '2', label: 'per day' },
@@ -24,8 +24,8 @@ export default function InputField() {
     }
 
     return (
-        <>
-            <div>Job</div>
+        <div className='big-field'>
+            <div><h3>{name}</h3></div>
             <div className='input-field'>
                 {/* <form action="" id="form" method="">
                     <label htmlFor="amount">Enter Amount:</label>
@@ -42,6 +42,7 @@ export default function InputField() {
                     id='form'
                     className='nFormat'
                     onValueChange={(val) => handleChange(val.floatValue)}
+                    onFocus={(e) => e.target.select()}
                 />
 
                 <Select
@@ -53,9 +54,8 @@ export default function InputField() {
                 />
                 
             </div>
-            <div>Number:{val}</div>
-            <div>Selection: {selectVal}</div>
-            <a href="./another">click here to go to diff page</a>
-        </>
+            {/* <div>Number:{val}</div>
+            <div>Selection: {selectVal}</div> */}
+        </div>
     );
 }
