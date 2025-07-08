@@ -3,7 +3,7 @@ import { NumericFormat } from "react-number-format"
 import Select from "react-select"
 import { useState } from 'react';
 
-export default function InputField({name}) {
+export default function InputField({name, numSetter, selSetter, index}) {
     const options = [
         { value: '0', label: 'per hour' },
         { value: '1', label: 'per day' },
@@ -45,15 +45,15 @@ export default function InputField({name}) {
         }),
     };
 
-    const [val, setVal] = useState(null);
-    const [selectVal, setSelectVal] = useState('')
+    // const [val, setVal] = useState(null);
+    // const [selectVal, setSelectVal] = useState('')
 
     const handleChange = (val) => {
-        setVal(val)
+        numSetter(val, index)
     }
 
     const handleSelectChange = (s) => {
-        setSelectVal(s)
+        selSetter(s, index)
         console.log(s)
     }
 
@@ -73,7 +73,7 @@ export default function InputField({name}) {
                     thousandSeparator={true}
                     prefix={'$'}
                     defaultValue={0}
-                    id='form'
+                    
                     className='nFormat'
                     onValueChange={(val) => handleChange(val.floatValue)}
                     onFocus={(e) => e.target.select()}
@@ -82,7 +82,7 @@ export default function InputField({name}) {
                 <Select
                     options={options}
                     placeholder="Rate"
-                    id="selection"
+                    
                     onChange={(val) => handleSelectChange(val.label)}
                     styles={customStyles}
                 />

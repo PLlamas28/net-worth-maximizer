@@ -1,104 +1,119 @@
 import { NumericFormat } from "react-number-format"
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import InputField from './InputField'
 import NumFormatWrap from "./NumFormatWrap";
+import logo from './assets/logo2.png';
 import './InputView.css'
 
 
 function InputView() {
+
+    const [cash, setCash] = useState(0)
+    const [numInputs, setNumInputs] = useState(Array(10).fill(0))
+    const [selInputs, setSelInputs] = useState(Array(6).fill(""))
+    
+
+    const handleSubmit = () => {
+        console.log("NumInputs:"+numInputs)
+        console.log("SelInputs:"+selInputs)
+        //setter(()=>(Number.isNaN(newValue) || newValue === undefined ? 0 : newValue));
+    };
+
+    const updateNumInputs = (newVal, index) => {
+        const newInputs = [...numInputs]
+        newInputs[index] = newVal
+        setNumInputs(newInputs)
+    };
+
+    const updateSelInputs = (newVal, index) => {
+        const newSelInputs = [...selInputs]
+        newSelInputs[index] = newVal
+        setSelInputs(newSelInputs)
+    }
+
     return (
-        <div className='input-parent'>
+        <div className="container">
+            <div className='left'>
 
-            <div className='field-box'>
-                <h2>Income</h2>
-                <InputField name="Job"/>
-                <InputField name="Allowance"/>
-                <InputField name="Other"/>
-            </div>
-
-            <div className='field-box'>
-                <h2>Expenses</h2>
-                <InputField name="Snacks"/>
-                <InputField name="Games"/>
-                <InputField name="Subscriptions"/>
-            </div>
-
-            <div className='field-box'>
-                <h2>Savings</h2>
-
-                <div>
+                <div className='field-box'>
+                    <h2>Income</h2>
+                    <InputField name="Job" numSetter={updateNumInputs} selSetter={updateSelInputs} index={0}/>
+                    <InputField name="Allowance" numSetter={updateNumInputs} selSetter={updateSelInputs} index={1}/>
+                    <InputField name="Other" numSetter={updateNumInputs} selSetter={updateSelInputs} index={2}/>
+                 
+                    <h2>Expenses</h2>
+                    <InputField name="Snacks" numSetter={updateNumInputs} selSetter={updateSelInputs} index={3}/>
+                    <InputField name="Games" numSetter={updateNumInputs} selSetter={updateSelInputs} index={4}/>
+                    <InputField name="Subscriptions" numSetter={updateNumInputs} selSetter={updateSelInputs} index={5}/>
+                 
+                    <h2>Savings</h2>
+          
                     <h3>Cash</h3>
                     <NumericFormat
                         thousandSeparator={true}
                         prefix="$"
-                        defaultValue={0}
+                        
+                        value = {cash}
                         className='savings-nFormat'
-                        onValueChange={(val) => handleChange(val.floatValue)}
+                        onValueChange={(val) => updateNumInputs(val.floatValue, 6)}
                         onFocus={(e) => e.target.select()}
                     />
-                </div>
-                
-                <div>
+                                         
                     <h3>Gift Cards</h3>
                     <NumericFormat
                         thousandSeparator={true}
                         prefix="$"
                         defaultValue={0}
                         className='savings-nFormat'
-                        onValueChange={(val) => handleChange(val.floatValue)}
+                        onValueChange={(val) => updateNumInputs(val.floatValue, 7)}
                         onFocus={(e) => e.target.select()}
                     />
-                </div>
                     
-                
+                    <div className='field-box-row'>
 
-                <div className='field-box-row'>
+                        <div id="bank-savings-wrap">
+                            <h3>Bank Account (Savings)</h3>
+                            <div id="rag">
+                                <NumericFormat
+                                    thousandSeparator={true}
+                                    prefix="$"
+                                    defaultValue={0}
+                                    id='bank-savings-nf'
+                                    className='savings-nFormat'
+                                    onValueChange={(val) => updateNumInputs(val.floatValue, 8)}
+                                    onFocus={(e) => e.target.select()}
+                                />
 
-                    <div id="bank-savings-wrap">
-                        <h3>Bank Account (Savings)</h3>
-                        <div id="rag">
-                            <NumericFormat
-                                thousandSeparator={true}
-                                prefix="$"
-                                defaultValue={0}
-                                id='bank-savings-nf'
-                                className='savings-nFormat'
-                                onValueChange={(val) => handleChange(val.floatValue)}
-                                onFocus={(e) => e.target.select()}
-                            />
-
+                            </div>
+                            
                         </div>
                         
-                    </div>
-                    
-                    <div id="apy-wrap">
-                        <h3>Interest Rate (APY)</h3>
-                        <div id="gar">
-                            <NumericFormat
-                                thousandSeparator={false}
-                                suffix="%"
-                                defaultValue={0}
-                                id='apy-savings-nf'
-                                className='savings-nFormat'
-                                onValueChange={(val) => handleChange(val.floatValue)}
-                                onFocus={(e) => e.target.select()}
-                            />
+                        <div id="apy-wrap">
+                            <h3>Interest Rate (APY)</h3>
+                            <div id="gar">
+                                <NumericFormat
+                                    thousandSeparator={false}
+                                    suffix="%"
+                                    defaultValue={0}
+                                    id='apy-savings-nf'
+                                    className='savings-nFormat'
+                                    onValueChange={(val) => updateNumInputs(val.floatValue, 9)}
+                                    onFocus={(e) => e.target.select()}
+                                />
+                            </div>
+                            
                         </div>
-                        
                     </div>
+                    <Link to="/another">
+                        <button onClick={handleSubmit}>Submit & go to next page</button>
+                    </Link>
                 </div>
-
-                
-                
             </div>
-
-            <Link to="/another">
-                <button>Submit & go to next page</button>
-            </Link>
-            
-
-
+            <div className="right">
+                <img src={logo} alt="Brookline High School Fintech Club Logo" />
+            </div>
         </div>
         
     );
