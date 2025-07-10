@@ -13,12 +13,41 @@ function InputView() {
     const [cash, setCash] = useState(0)
     const [numInputs, setNumInputs] = useState(Array(10).fill(0))
     const [selInputs, setSelInputs] = useState(Array(6).fill(""))
+    const [error, setError] = useState(null)
     
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+        // e.preventDefault();
         console.log("NumInputs:"+numInputs)
         console.log("SelInputs:"+selInputs)
-        //setter(()=>(Number.isNaN(newValue) || newValue === undefined ? 0 : newValue));
+        console.log("json:",JSON.stringify({ numInputs: numInputs, selInputs: selInputs }))
+
+        for (let i = 0; i < 10; i++){
+            if (numInputs[i] === undefined || Number.isNaN(numInputs[i])){
+                numInputs[i] = 0
+            }
+            if (i <= 5 && (selInputs[i] == "" || selInputs[i] === undefined)){
+                selInputs[i] = "per nothing"
+            }
+        }
+
+        try {
+            setError(null);
+            const response = await fetch('http://localhost:5000/api/data', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ numInputs: numInputs, selInputs: selInputs }),
+            });
+
+            //if (!response.ok) throw new Error('Network response was not ok');
+
+            const chartData = await response.json();
+            console.log(chartData)
+            
+        } catch (err) {
+            setError('Failed to fetch chart data from backend.');
+            console.log(err)
+        }
     };
 
     const updateNumInputs = (newVal, index) => {
@@ -54,8 +83,7 @@ function InputView() {
                     <NumericFormat
                         thousandSeparator={true}
                         prefix="$"
-                        
-                        value = {cash}
+                        defaultValue={0}
                         className='savings-nFormat'
                         onValueChange={(val) => updateNumInputs(val.floatValue, 6)}
                         onFocus={(e) => e.target.select()}

@@ -73,7 +73,6 @@ export default function InputField({name, numSetter, selSetter, index}) {
                     thousandSeparator={true}
                     prefix={'$'}
                     defaultValue={0}
-                    
                     className='nFormat'
                     onValueChange={(val) => handleChange(val.floatValue)}
                     onFocus={(e) => e.target.select()}
@@ -82,7 +81,7 @@ export default function InputField({name, numSetter, selSetter, index}) {
                 <Select
                     options={options}
                     placeholder="Rate"
-                    
+                    className='selection'
                     onChange={(val) => handleSelectChange(val.label)}
                     styles={customStyles}
                 />
