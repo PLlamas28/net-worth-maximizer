@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 import InputField from './InputField'
-import NumFormatWrap from "./NumFormatWrap";
 import logo from './assets/logo2.png';
 import './InputView.css'
 
 
-function InputView() {
+function InputView({setFlag}) {
 
-    const [cash, setCash] = useState(0)
     const [numInputs, setNumInputs] = useState(Array(10).fill(0))
     const [selInputs, setSelInputs] = useState(Array(6).fill(""))
     const [error, setError] = useState(null)
@@ -18,9 +16,11 @@ function InputView() {
 
     const handleSubmit = async (e) => {
         // e.preventDefault();
-        console.log("NumInputs:"+numInputs)
-        console.log("SelInputs:"+selInputs)
-        console.log("json:",JSON.stringify({ numInputs: numInputs, selInputs: selInputs }))
+        // console.log("NumInputs:"+numInputs)
+        // console.log("SelInputs:"+selInputs)
+        // console.log("json:",JSON.stringify({ values: numInputs, timeUnits: selInputs }))
+
+        setFlag((prev) => !prev)
 
         for (let i = 0; i < 10; i++){
             if (numInputs[i] === undefined || Number.isNaN(numInputs[i])){
@@ -36,7 +36,7 @@ function InputView() {
             const response = await fetch('http://localhost:5000/api/data', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ numInputs: numInputs, selInputs: selInputs }),
+                body: JSON.stringify({ values: numInputs, timeUnits: selInputs }),
             });
 
             //if (!response.ok) throw new Error('Network response was not ok');

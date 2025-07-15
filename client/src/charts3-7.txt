@@ -1,0 +1,14 @@
+          {/* Chart 5 */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <Doughnut data={chart5Data} options={chart5Options} />
+          </div>
+
+          {/* Chart 6 */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <Line data={chart6Data} options={chart6Options} />
+          </div>
+
+          {/* Chart 7 - Full Width */}
+          <div className="bg-white rounded-lg shadow-md p-6 lg:col-span-2">
+            <Line data={chart7Data} options={chart7Options} />
+          </div>

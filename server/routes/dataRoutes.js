@@ -1,45 +1,63 @@
 const express = require('express');
 const router = express.Router();
 
-const rates = new Map();
-rates.set("per hour", 2000) // assume 2000 hours per year with typical American holidays
-rates.set("per day", 250)
-rates.set("per week", 50) // take off 2 weeks for holidays
-rates.set("per month", 12)
-rates.set("per year", 1)
-rates.set("per nothing", 0)
+let chartData = []
 
-let income = 0;
-let expenses = 0;
-let savings = 0;
+// Time conversion factors to monthly
+const timeFactors = {
+  'per nothing': 0,
+  'per hour': 160, // ~40 hours/week * 4 weeks
+  'per day': 30,
+  'per week': 4.33,
+  'per month': 1,
+  'per year': 1/12
+};
+
+// Convert time-based values to monthly
+const normalizeToMonthly = (value, timeUnit) => {
+  return value * timeFactors[timeUnit];
+};
+
+// Get normalized monthly values
+function createMonthlyData(values, timeUnits){
+  const monthlyIncome = values.slice(0, 3).map((val, idx) => 
+    normalizeToMonthly(val, timeUnits[idx])
+  );
+  const monthlyExpenses = values.slice(3, 6).map((val, idx) => 
+    normalizeToMonthly(val, timeUnits[idx + 3])
+  );
+  const savings = values.slice(6, 9); // No time conversion needed
+  const interestRate = values[9];
+
+  const totalIncome = monthlyIncome.reduce((sum, val) => sum + val, 0);
+  const totalExpenses = monthlyExpenses.reduce((sum, val) => sum + val, 0);
+  const totalSavings = savings.reduce((sum, val) => sum + val, 0);
+
+  return [
+    monthlyIncome, 
+    monthlyExpenses, 
+    savings, 
+    interestRate,
+    totalIncome,
+    totalExpenses,
+    totalSavings
+  ];
+};
 
 // Define
 router.post('/', (req, res) => {
-  const { numInputs, selInputs } = req.body;
+  const { values, timeUnits } = req.body;
 
-  for (let i = 0; i < 9; i++){
-    if (i < 3){
-      income += numInputs[i] * rates.get(selInputs[i])
-    }
-    else if (i < 6) {
-      expenses += numInputs[i] * rates.get(selInputs[i])
-    } else if (i < 9) {
-      savings += numInputs[i]
-    } else {
-      savings += numInputs[8] * (1+numInputs[9]/100)
-    }
-  }
-
-  const chartData = {
-    // labels: form1Data.map((_, i) => `Point ${i + 1}`),
-    // datasets: [
-    //   { label: 'Form 1', data: form1Data },
-    //   { label: 'Form 2', data: form2Data },
-    // ],
-    data: [income, expenses, savings]
-  };
-
-  res.json(chartData);
+  chartData = createMonthlyData(values, timeUnits)
+  
+  console.log(chartData)
+  res.json({chartData});
 });
+
+router.get('/', (req, res) => {
+  res.json({
+    chartData
+  })
+})
 
 module.exports = router;
