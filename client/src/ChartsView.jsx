@@ -13,6 +13,8 @@ import {
 } from 'chart.js';
 import { Bar, Line, Pie, Doughnut } from 'react-chartjs-2';
 
+import './ChartsView.css';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -39,7 +41,7 @@ const ChartsView = ({chartData}) => {
 
     const logFunc = () => {
         console.log("chartdata:",chartData)
-        console.log("chartdata[2]",chartData[2])
+        console.log("monthlyData.monthlyIncome[0]",monthlyData.monthlyIncome[0])
         console.log(monthlyData.savings)
     }
   
@@ -58,6 +60,7 @@ const ChartsView = ({chartData}) => {
 
   const chart1Options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -100,6 +103,7 @@ const ChartsView = ({chartData}) => {
 
   const chart2Options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -133,6 +137,7 @@ const ChartsView = ({chartData}) => {
 
   const chart3Options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -161,6 +166,7 @@ const ChartsView = ({chartData}) => {
 
   const chart4Options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -189,6 +195,7 @@ const ChartsView = ({chartData}) => {
 
   const chart5Options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -231,6 +238,7 @@ const ChartsView = ({chartData}) => {
 
   const chart6Options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -288,6 +296,7 @@ const ChartsView = ({chartData}) => {
 
   const chart7Options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -325,47 +334,49 @@ const ChartsView = ({chartData}) => {
 
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+    <div className="">
+        <div className="">
+        <h1 className="">
           Financial Dashboard
         </h1>
+      
+        
         
 
         {/* Charts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid-parent">
           {/* Chart 1 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="one">
             <Bar data={chart1Data} options={chart1Options} />
           </div>
 
           {/* Chart 2 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="two">
             <Bar data={chart2Data} options={chart2Options} />
           </div>
 
           {/* Chart 3 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="three">
             <Pie data={chart3Data} options={chart3Options} />
           </div>
 
           {/* Chart 4 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="four">
             <Pie data={chart4Data} options={chart4Options} />
           </div>
 
           {/* Chart 5 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="five">
             <Doughnut data={chart5Data} options={chart5Options} />
           </div>
 
           {/* Chart 6 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="six">
             <Line data={chart6Data} options={chart6Options} />
           </div>
 
           {/* Chart 7 - Full Width */}
-          <div className="bg-white rounded-lg shadow-md p-6 lg:col-span-2">
+          <div className="seven">
             <Line data={chart7Data} options={chart7Options} />
           </div>
 
